@@ -1,0 +1,128 @@
+<h1>Welcome</h1>
+
+<!-- Interplation -->
+<p>1+1 = {{1+1+3}}</p>
+{{name}}
+<p>{{getName(5)}}</p>
+<p>{{employees}}</p>
+<p>{{employees[0]}}</p>
+<p>{{employees[1]}}</p>
+<p>{{employees[2]}}</p>
+<ul>
+  <li>Title: {{employee.title}}</li>
+  <li>Name: {{employee.name}}</li>
+  <li>Salary: {{employee.salary}}</li>
+</ul>
+<img src="{{employee.src}}" width="200px" height="200px" alt="{{employee.alt}}" /> <br/> <br/>
+
+<!-- Event Binding -->
+<!-- <input type="text" (mousemove)="mouseover()" (mouseout)="mouseout()" (change)="changeme()" [id]="textID" [class]="myClasses" /> <br/> -->
+<!-- <input type="text" (mousemove)="mouseover()" (mouseout)="mouseout()" (change)="changeme()" [id]="textID" [class.success]="false" /> <br/> -->
+<input type="text" (mousemove)="mouseover()" (mouseout)="mouseout()" (change)="changeme()" [id]="textID" [class.success]="isDisabled" class="height20" /> <br/>
+<input type="text" (mousemove)="mouseover()" (mouseout)="mouseout()" (change)="changeme()" id="{{textID}}"/> <br/>
+
+<!-- Property Binding -->
+<input type="button" value="Save" (click)="Save()" [disabled]="isDisabled"  /> <br/>
+
+<!-- Attribute biniding -->
+<img [attr.src]="src" [attr.width]="imgwidth" height="200px" alt="profiepic" />
+
+<!-- Style Binding -->
+<!-- <p [style.color]="'red'" [style.font-size.px]="'20'" >style binding</p> -->
+<p [style]="textStyle">style binding</p>
+
+<!-- Template Reference variables -->
+<input type="text" #mytext value="abc">
+{{mytext.value}}
+<button [disabled]="!mytext.value">Save</button>
+
+<!-- ngif Structural directive -->
+<!-- <ul *ngIf="ngifshow">
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</ul>
+
+<div *ngIf="!ngifshow">
+  <p>No Records found</p>
+</div> -->
+
+<!-- <ul *ngIf="ngifshow; else noRecords">
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</ul>
+
+<ng-template #noRecords>
+  <p>No Records found</p>
+</ng-template> -->
+
+
+<ul *ngIf="ngifshow; then records else noRecords">
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</ul>
+
+<ng-template #records>
+  <ul>
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+  </ul>
+</ng-template>
+
+<ng-template #noRecords>
+  <p>No Records found</p>
+</ng-template>
+
+<!-- ngFor structual Directives -->
+<ul>
+  <li *ngFor="let manager of managers; index as i; first as f; last as l; even as e; odd as o">
+    {{manager}} {{i}} {{f}} {{l}} {{e}} {{o}}
+  </li>
+</ul>
+
+<table border="1">
+  <thead>
+    <th>Index</th>
+    <th>Name</th>
+    <th>Salary</th>
+    <th>Address</th>
+    <th>First</th>
+    <th>Last</th>
+    <th>Even</th>
+    <th>Odd</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let manager of managersList; index as i; first as f; last as l; even as e; odd as o; trackBy: refreshEmployees">
+    <td>{{i}}</td>
+    <td>{{manager.name}}</td>
+    <td>{{manager.salary}}</td>
+    <td>{{manager.address}}</td>
+    <td>{{f}}</td>
+    <td>{{l}}</td>
+    <td>{{e}}</td>
+    <td>{{o}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Ng for Track By -->
+<button (click)="refresh()">Refesh</button>
+
+<!-- Ng Switch Structural Directive -->
+<div [ngSwitch]="integerData">
+  <div *ngSwitchCase="1">
+    <p>I am 1</p>
+  </div>
+  <div *ngSwitchCase="2">
+    <p>I am 2</p>
+  </div>
+  <div *ngSwitchCase="3">
+    <p>I am 3</p>
+  </div>
+  <div *ngSwitchDefault>
+    <p>I am default</p>
+  </div>
+</div>
